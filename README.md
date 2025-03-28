@@ -1,3 +1,9 @@
+# Instr
+
+- add a .env file at the root folder with AWS creds
+
+
+
 # 1. Video 
 
 - s3 bucket-> config permissions -> setup IAM user with all persmissions for upload,fetch and del
