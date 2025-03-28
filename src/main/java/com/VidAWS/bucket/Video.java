@@ -1,12 +1,14 @@
 package com.VidAWS.bucket;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -15,8 +17,23 @@ import lombok.Setter;
 @Setter
 public class Video {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String title;
+    @Column(length = 2000)
     private String viewUrl;
-    private String downloadURl;
+
+    @Column(length = 2000)
+    private String downloadUrl;
+    @Column(updatable = false)
+    private LocalDateTime uploadedAt;
+
+    private double fileSize;
+    private String contentType;
+
+    @PrePersist
+    public void prePersist() {
+        this.uploadedAt = LocalDateTime.now();
+    }
 }
